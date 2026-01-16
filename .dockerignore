@@ -1,0 +1,22 @@
+# Окружение и зависимости
+.venv/
+env/
+venv/
+__pycache__/
+*.py[cod]
+
+# Конфиги редактора и системы
+.idea/
+.vscode/
+.DS_Store
+.git/
+.github/
+
+# Логи и временные файлы проекта
+*.log
+dist/
+build/
+output.png
+
+# Файлы uv (если они создаются локально)
+.uv/

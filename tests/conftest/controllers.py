@@ -1,9 +1,7 @@
 import pytest
 
-from imprint.core.container import (
-    CoreContainer,
-    ControllersContainer,
-)
+from imprint.core.container import CoreContainer
+from imprint.core.container.controllers import ControllersContainer
 
 
 @pytest.fixture(scope="session", autouse=True)

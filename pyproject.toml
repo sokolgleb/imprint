@@ -22,3 +22,28 @@ dev = [
     "pytest>=9.0.2",
     "pytest-cov>=7.0.0",
 ]
+
+
+[tool.pytest.ini_options]
+# Просто указываем, где лежат тесты
+testpaths = ["tests"]
+pythonpath = ["."]
+# Убираем проблемные плагины, оставляем только полезные флаги
+addopts = "-ra --strict-markers"
+log_cli = true
+log_cli_level = "INFO"
+
+[tool.ruff]
+# Заменяет flake8, isort и pycodestyle
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+# Заменяет настройки select из setup.cfg
+select = ["E", "F", "W", "B", "I", "C90"]
+ignore = ["E203"]
+
+[tool.mypy]
+# Настройки для проверки типов
+ignore_missing_imports = true
+check_untyped_defs = true
