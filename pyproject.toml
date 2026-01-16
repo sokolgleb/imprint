@@ -1,0 +1,12 @@
+[project]
+name = "imprint"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "cryptography>=46.0.3",
+    "pillow>=12.1.0",
+    "pydantic>=2.12.5",
+    "simhash>=2.1.2",
+]

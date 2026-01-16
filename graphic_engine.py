@@ -80,6 +80,8 @@ class CrystalDrawer(DrawerBase):
         line_width = max(1, int(self.line_width * draw_settings.scale_factor))
         max_radius = (draw_settings.canvas_size // 2) * 0.85
         current_angle = 0.0
+        seed = int(draw_settings.hash, 16) % (2**32)
+        rng = random.Random(seed)
 
         for i, (char, count) in enumerate(draw_settings.chars_stats):
             percentage = count / draw_settings.symbols_count
@@ -96,9 +98,9 @@ class CrystalDrawer(DrawerBase):
 
             for _ in range(min(num_rays, 800)):
                 rad_angle = math.radians(
-                    random.uniform(current_angle, current_angle + angle_sweep)
+                    rng.uniform(current_angle, current_angle + angle_sweep)
                 )
-                length = radius * random.uniform(0.7, 1.1)
+                length = radius * rng.uniform(0.7, 1.1)
                 x_end = center_x + math.cos(rad_angle) * length
                 y_end = center_y + math.sin(rad_angle) * length
 
