@@ -3,9 +3,9 @@ from typing import Optional
 
 from PIL import Image
 
-from graphic_engine import GraphicEngine, DrawSettings
-from stego_crypt import StegoCrypt
-from text_analyzer import TextAnalyzer, TextMetrics
+from graphic_engine.base import GraphicEngine, DrawSettings
+from stego_crypt.stego_crypt import StegoCrypt
+from text_analyzer.text_analyzer import TextAnalyzer, TextMetrics
 
 
 class Imprint:
