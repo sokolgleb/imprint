@@ -9,7 +9,7 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
 
-class StegoCrypt:
+class StegoCryptController:
 
     def _generate_key(self, password: str, salt: bytes) -> bytes:
         kdf = PBKDF2HMAC(

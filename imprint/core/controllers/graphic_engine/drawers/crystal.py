@@ -4,7 +4,10 @@ from typing import Optional
 
 from PIL import ImageDraw
 
-from graphic_engine.drawers.base import DrawerBase, DrawSettings
+from imprint.core.controllers.graphic_engine.drawers.base import (
+    DrawerBase,
+    DrawSettings,
+)
 
 
 class CrystalDrawer(DrawerBase):

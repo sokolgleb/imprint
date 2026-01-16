@@ -16,7 +16,7 @@ class TextMetrics(BaseModel):
     symbols_count: int
 
 
-class TextAnalyzer:
+class TextAnalyzerController:
     def __init__(
         self,
         n_gram_size: int = 3,
@@ -102,7 +102,7 @@ class TextAnalyzer:
 
 
 if __name__ == "__main__":
-    text_analyzer = TextAnalyzer()
+    text_analyzer = TextAnalyzerController()
 
     for i in range(1, 5):
         text = str(uuid.uuid4()) * i

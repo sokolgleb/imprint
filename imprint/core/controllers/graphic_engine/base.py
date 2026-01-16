@@ -1,12 +1,17 @@
 from PIL import Image, ImageDraw
 
-from graphic_engine.drawers.base import DrawerBase, DrawSettings
-from graphic_engine.drawers.core import CoreDrawer
-from graphic_engine.drawers.crystal import CrystalDrawer
-from graphic_engine.drawers.kaleidoscope import KaleidoscopeDrawer
+from imprint.core.controllers.graphic_engine.drawers.base import (
+    DrawerBase,
+    DrawSettings,
+)
+from imprint.core.controllers.graphic_engine.drawers.core import CoreDrawer
+from imprint.core.controllers.graphic_engine.drawers.crystal import CrystalDrawer
+from imprint.core.controllers.graphic_engine.drawers.kaleidoscope import (
+    KaleidoscopeDrawer,
+)
 
 
-class GraphicEngine:
+class GraphicEngineController:
 
     def __init__(self, default_drawers: list[DrawerBase] = None):
         if not default_drawers:
