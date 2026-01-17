@@ -23,7 +23,12 @@ class ImprintController:
         self.graphic_engine_controller = graphic_engine_controller
         self.stego_crypt_controller = stego_crypt_controller
 
-    def create(self, text: str, password: Optional[str] = None) -> Image.Image:
+    def create(
+        self,
+        text: str,
+        password: Optional[str] = None,
+        drawers=None,
+    ) -> Image.Image:
         metrics: TextMetrics = self.text_analyzer_controller.analyze(text)
         image: Image.Image = self.graphic_engine_controller.draw(
             DrawSettings(
@@ -31,7 +36,8 @@ class ImprintController:
                 canvas_size=metrics.canvas_size,
                 chars_stats=metrics.chars_stats,
                 symbols_count=metrics.symbols_count,
-            )
+            ),
+            drawers=drawers,
         )
         stego_image: Image.Image = self.stego_crypt_controller.encode(
             image,

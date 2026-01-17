@@ -10,6 +10,7 @@ from imprint.core.controllers.graphic_engine.drawers.base import (
 
 
 class CoreDrawer(DrawerBase):
+    name = "core"
 
     def __init__(self, color: Optional[str] = None, alpha: int = 76):
         super().__init__(color=color, alpha=alpha)

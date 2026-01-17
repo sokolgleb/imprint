@@ -1,4 +1,5 @@
 import collections
+import hashlib
 import math
 import re
 import uuid
@@ -86,15 +87,29 @@ class TextAnalyzerController:
 
         return int(size)
 
+    def get_incremental_hash(self, text: str) -> str:
+        parts = text.split()
+        full_hash = ""
+
+        for part in parts:
+            part_hash = hashlib.md5(part.encode()).hexdigest()[:8]
+            full_hash += part_hash
+
+        return full_hash
+
     def analyze(self, text: str) -> TextMetrics:
+        # SimHash
         hash = Simhash(self._get_features(text), f=self.hash_dimension)
+        hash = f"{hash.value:x}"
+
+        print(hash)
 
         chars_stats = collections.Counter(text)
         sorted(chars_stats.items(), key=lambda item: ord(item[0]))
 
         return TextMetrics(
             text=text,
-            hash=f"{hash.value:x}",
+            hash=hash,
             canvas_size=self._calculate_canvas_size(len(text)),
             chars_stats=chars_stats.items(),
             symbols_count=len(text) if text else 1,

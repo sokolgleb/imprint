@@ -39,3 +39,13 @@ async def api_app(api_container):
 def rest_client(api_app):
     with TestClient(api_app) as c:
         yield c
+
+
+@pytest.fixture(scope="session")
+async def controllers(core_container):
+    yield core_container.controllers
+
+
+@pytest.fixture(scope="session")
+async def imprint_controller(controllers):
+    yield controllers.imprint()

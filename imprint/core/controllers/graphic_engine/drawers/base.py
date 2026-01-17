@@ -22,6 +22,8 @@ class DrawSettings(BaseModel):
 
 class DrawerBase:
 
+    name: str = None
+
     def __init__(
         self,
         color: Optional[str] = None,

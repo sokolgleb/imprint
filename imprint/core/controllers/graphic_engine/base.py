@@ -6,16 +6,14 @@ from imprint.core.controllers.graphic_engine.drawers.base import (
 )
 from imprint.core.controllers.graphic_engine.drawers.core import CoreDrawer
 from imprint.core.controllers.graphic_engine.drawers.crystal import CrystalDrawer
-from imprint.core.controllers.graphic_engine.drawers.kaleidoscope import (
-    KaleidoscopeDrawer,
-)
+from imprint.core.controllers.graphic_engine.drawers.flow import FlowDrawer
 
 
 class GraphicEngineController:
 
     def __init__(self, default_drawers: list[DrawerBase] = None):
         if not default_drawers:
-            default_drawers = [CrystalDrawer(), CoreDrawer(), KaleidoscopeDrawer()]
+            default_drawers = [CrystalDrawer(), CoreDrawer(), FlowDrawer()]
 
         self.default_drawers = default_drawers
 

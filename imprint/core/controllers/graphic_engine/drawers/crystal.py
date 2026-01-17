@@ -11,6 +11,7 @@ from imprint.core.controllers.graphic_engine.drawers.base import (
 
 
 class CrystalDrawer(DrawerBase):
+    name = "crystal"
 
     def __init__(
         self,

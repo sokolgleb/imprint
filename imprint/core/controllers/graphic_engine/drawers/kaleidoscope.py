@@ -11,6 +11,7 @@ from imprint.core.controllers.graphic_engine.drawers.base import (
 
 
 class KaleidoscopeDrawer(DrawerBase):
+    name = "kaleidoscope"
 
     def __init__(
         self,
