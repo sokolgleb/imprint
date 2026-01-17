@@ -102,8 +102,6 @@ class TextAnalyzerController:
         hash = Simhash(self._get_features(text), f=self.hash_dimension)
         hash = f"{hash.value:x}"
 
-        print(hash)
-
         chars_stats = collections.Counter(text)
         sorted(chars_stats.items(), key=lambda item: ord(item[0]))
 

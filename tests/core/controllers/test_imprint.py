@@ -44,5 +44,5 @@ def test_drawers_with_text(
     ]:
         image = imprint_controller.create(text, password=None, drawers=drawers)
 
-        file_name = f"{text[:10]}___{'_'.join([d.name for d in drawers])}.png"
+        file_name = f"{text[:50]}___{'_'.join([d.name for d in drawers])}.png"
         image.convert("RGB").save(file_name, "PNG")
