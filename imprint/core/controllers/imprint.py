@@ -1,4 +1,3 @@
-import time
 from typing import Optional
 
 from PIL import Image
@@ -40,11 +39,12 @@ class ImprintController:
             password,
         )
 
-        file_name = f"{int(time.time() * 1000)}.png"
-        stego_image.convert("RGB").save(file_name, "PNG")
+        # import time
+        # file_name = f"{int(time.time() * 1000)}.png"
+        # stego_image.convert("RGB").save(file_name, "PNG")
 
         return stego_image
 
-    def parse(self, image_path: str, password: Optional[str] = None) -> str:
-        image = Image.open(image_path).convert("RGB")
+    def parse(self, image: Image, password: Optional[str] = None) -> str:
+        image = image.convert("RGB")
         return self.stego_crypt_controller.decode(image, password)
