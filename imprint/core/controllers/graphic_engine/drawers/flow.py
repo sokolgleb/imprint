@@ -33,14 +33,9 @@ class FlowDrawer(DrawerBase):
 
         sc = draw_settings.symbols_count if draw_settings.symbols_count > 0 else 1
 
-        # Константа 75 подбирает рост так, чтобы на 30 000 символов (5000 слов)
-        # результат был в районе 800-900.
-        # 300 (база) + 75 * log(30000) ≈ 300 + 75 * 10.3 ≈ 1070
-        # Чтобы было еще медленнее, используем коэффициент 50:
-        # 300 + 50 * 10.3 ≈ 815.
-        dynamic_density = 300 + 50 * math.log(sc)
+        dynamic_density = 300 + 50 * int(math.log(sc, 3))
 
-        final_density = max(300, min(2000, int(dynamic_density)))
+        final_density = max(300, min(1000, int(dynamic_density)))
 
         # Определение цвета
         if self.color is None:
@@ -57,9 +52,14 @@ class FlowDrawer(DrawerBase):
         # Параметры генерации
         seed = int(draw_settings.hash, 16) % (2**32)
         rng = random.Random(seed)
-        num_sectors = 4 + (draw_settings.bytes_list[0] % 9)
-        angle_step = 2 * math.pi / num_sectors
+
         step_dist = 12 * draw_settings.scale_factor
+
+        # num_sectors = 4 + (draw_settings.bytes_list[0] % 9)
+        dynamic_sectors = 4 + int(math.log(sc, 4))
+        num_sectors = max(4, min(18, dynamic_sectors))
+
+        angle_step = 2 * math.pi / num_sectors
 
         # 1. Генерируем "скелет" пути (набор точек одного сектора)
         path_points = [
