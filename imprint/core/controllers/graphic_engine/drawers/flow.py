@@ -38,15 +38,8 @@ class FlowDrawer(DrawerBase):
         final_density = max(300, min(1000, int(dynamic_density)))
 
         # Определение цвета
-        if self.color is None:
-            base_hue = self.get_base_color_from_hash(draw_settings.bytes_list)
-            pattern_rgb = self.get_rgb_color(base_hue, 90, 60)
-        else:
-            pattern_rgb = (
-                ImageDraw._color_diff(self.color, "RGB")
-                if isinstance(self.color, str)
-                else self.color
-            )
+        base_hue = self.get_base_hue_color(draw_settings.bytes_list)
+        pattern_rgb = self.get_rgb_base_color(base_hue, 90, 60)
         rgba_pattern = (*pattern_rgb[:3], self.alpha)
 
         # Параметры генерации

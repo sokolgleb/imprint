@@ -32,7 +32,9 @@ class CrystalDrawer(DrawerBase):
         **kwargs,
     ) -> ImageDraw:
         center_x = center_y = draw_settings.canvas_size // 2
-        base_hue = self.get_base_color_from_hash(draw_settings.bytes_list)
+        base_hue = self.get_base_hue_color(draw_settings.bytes_list)
+        core_rgb = self.get_rgb_base_color(base_hue, 90, 60)
+
         line_width = max(1, int(self.line_width * draw_settings.scale_factor))
         max_radius = (draw_settings.canvas_size // 2) * 0.85
         current_angle = 0.0
@@ -44,7 +46,7 @@ class CrystalDrawer(DrawerBase):
             angle_sweep = percentage * 360
             s_val, v_val = max(0, min(100, 40 + (i % 20))), 90
 
-            rgb_base = self.get_rgb_color(base_hue, s_val, v_val)
+            rgb_base = self.get_rgb_base_color(base_hue, s_val, v_val)
             rgba_crystal = (*rgb_base, self.alpha)
 
             num_rays = int(

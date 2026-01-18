@@ -31,18 +31,10 @@ class KaleidoscopeDrawer(DrawerBase):
         self, canvas: ImageDraw, draw_settings: DrawSettings, **kwargs
     ) -> ImageDraw:
         center_x = center_y = draw_settings.canvas_size // 2
-        base_hue = self.get_base_color_from_hash(draw_settings.bytes_list)
         line_width = max(1, int(self.line_width * draw_settings.scale_factor))
 
-        if self.color is None:
-            pattern_rgb = self.get_rgb_color(base_hue, 90, 60)
-        else:
-            pattern_rgb = (
-                ImageDraw._color_diff(self.color, "RGB")
-                if isinstance(self.color, str)
-                else self.color
-            )
-
+        base_hue = self.get_base_hue_color(draw_settings.bytes_list)
+        pattern_rgb = self.get_rgb_base_color(base_hue, 90, 60)
         rgba_pattern = (*pattern_rgb[:3], self.alpha)
 
         seed = int(draw_settings.hash, 16) % (2**32)

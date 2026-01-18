@@ -12,7 +12,7 @@ from imprint.core.controllers.graphic_engine.drawers.base import (
 class CoreDrawer(DrawerBase):
     name = "core"
 
-    def __init__(self, color: Optional[str] = None, alpha: int = 76):
+    def __init__(self, color: Optional[str] = None, alpha: int = 200):
         super().__init__(color=color, alpha=alpha)
 
     def draw(
@@ -22,17 +22,8 @@ class CoreDrawer(DrawerBase):
         **kwargs,
     ) -> ImageDraw:
         center_x = center_y = draw_settings.canvas_size // 2
-        base_hue = self.get_base_color_from_hash(draw_settings.bytes_list)
-
-        if self.color is None:
-            core_rgb = self.get_rgb_color(base_hue, 90, 60)
-        else:
-            # Если цвет задан строкой (напр. 'red'), Pillow его поймет
-            core_rgb = (
-                ImageDraw._color_diff(self.color, "RGB")
-                if isinstance(self.color, str)
-                else self.color
-            )
+        base_hue = self.get_base_hue_color(draw_settings.bytes_list)
+        core_rgb = self.get_rgb_base_color(base_hue, 90, 60)
 
         rgba_core = (*core_rgb[:3], self.alpha)
         core_radius = int(

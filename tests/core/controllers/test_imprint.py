@@ -7,10 +7,10 @@ from imprint.core.controllers.graphic_engine.drawers.kaleidoscope import (
     KaleidoscopeDrawer,
 )
 
-crystal_drawer = CrystalDrawer()
-core_drawer = CoreDrawer()
+crystal_drawer = CrystalDrawer(color="red")
+core_drawer = CoreDrawer(color="red")
 kaleidoscope_drawer = KaleidoscopeDrawer(density=500)
-flow_drawer = FlowDrawer()
+flow_drawer = FlowDrawer(color="red")
 
 
 @pytest.mark.parametrize(
