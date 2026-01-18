@@ -3,14 +3,16 @@ import pytest
 from imprint.core.controllers.graphic_engine.drawers.core import CoreDrawer
 from imprint.core.controllers.graphic_engine.drawers.crystal import CrystalDrawer
 from imprint.core.controllers.graphic_engine.drawers.flow import FlowDrawer
+from imprint.core.controllers.graphic_engine.drawers.genesis import GenesisDrawer
 from imprint.core.controllers.graphic_engine.drawers.kaleidoscope import (
     KaleidoscopeDrawer,
 )
 
 crystal_drawer = CrystalDrawer(color="red")
 core_drawer = CoreDrawer(color="red")
-kaleidoscope_drawer = KaleidoscopeDrawer(density=500)
+kaleidoscope_drawer = KaleidoscopeDrawer(color="red")
 flow_drawer = FlowDrawer(color="red")
+genesis_drawer = GenesisDrawer(color="red")
 
 
 @pytest.mark.parametrize(
@@ -28,6 +30,13 @@ flow_drawer = FlowDrawer(color="red")
                 crystal_drawer,
                 core_drawer,
                 flow_drawer,
+            ]
+        ],
+        [
+            [
+                crystal_drawer,
+                core_drawer,
+                genesis_drawer,
             ]
         ],
     ],

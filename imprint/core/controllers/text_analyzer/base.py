@@ -6,7 +6,6 @@ import uuid
 from typing import Generator
 
 from pydantic import BaseModel
-from simhash import Simhash
 
 
 class TextMetrics(BaseModel):
@@ -97,10 +96,45 @@ class TextAnalyzerController:
 
         return full_hash
 
+    import hashlib
+
+    def get_logarithmic_hash(self, text: str) -> str:
+        """
+        Создает хэш, который растет по мере добавления слов,
+        но не линейно, а логарифмически (1, 2, 4, 8, 16...).
+        """
+        words = text.split()
+        if not words:
+            return hashlib.md5(b"").hexdigest()
+
+        full_hash = ""
+        # Мы будем брать хэши от префиксов на позициях 2^n
+        indices = [0]  # Всегда берем первое слово
+        i = 1
+        while i < len(words):
+            indices.append(i)
+            i *= 2  # Логарифмический шаг
+
+        # Добавляем последнее слово обязательно, если его еще нет
+        if (len(words) - 1) not in indices:
+            indices.append(len(words) - 1)
+
+        for idx in indices:
+            # Хэшируем срез текста от начала до контрольного слова
+            prefix = " ".join(words[: idx + 1])
+            # Берем только 4 символа от каждого среза, чтобы хэш не был гигантским
+            chunk = hashlib.md5(prefix.encode()).hexdigest()[:4]
+            full_hash += chunk
+
+        return full_hash
+
     def analyze(self, text: str) -> TextMetrics:
         # SimHash
-        hash = Simhash(self._get_features(text), f=self.hash_dimension)
-        hash = f"{hash.value:x}"
+        # hash = Simhash(self._get_features(text), f=self.hash_dimension)
+        # hash = f"{hash.value:x}"
+
+        # Logarithmic hash
+        hash = self.get_logarithmic_hash(text)
 
         chars_stats = collections.Counter(text)
         sorted(chars_stats.items(), key=lambda item: ord(item[0]))
